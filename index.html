@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Tracker DevOps</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>⏱️ DevOps Time Tracker</h1>
+        <p>Total hoy: <span id="totalTime">0</span>/540 minutos</p>
+        
+        <div class="time-selector">
+            <select id="predefinedTime">
+                <option value="5">5 min</option>
+                <option value="10">10 min</option>
+                <option value="25">25 min</option>
+                <option value="30">30 min</option>
+                <option value="45">45 min</option>
+                <option value="60">60 min</option>
+                <option value="90">90 min</option>
+                <option value="120">120 min</option>
+                <option value="150">150 min</option>
+                <option value="180">180 min</option>
+                <option value="240">240 min</option>
+                <option value="360">360 min</option>
+                <option value="480">480 min</option>
+            </select>
+            <input type="number" id="customTime" placeholder="Minutos personalizados" min="1">
+            <button id="addTime">➕ Agregar</button>
+        </div>
+        
+        <div class="log">
+            <h3>Registro:</h3>
+            <ul id="timeLog"></ul>
+        </div>
+        
+        <button id="reset">🔴 Reiniciar día</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
