@@ -1,6 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f9;
+    font-family: 'Arial', sans-serif;
+    background: #f0f2f5;
     margin: 0;
     padding: 20px;
     color: #333;
@@ -10,21 +10,62 @@ body {
     max-width: 600px;
     margin: 0 auto;
     background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.time-display {
+    text-align: center;
+    margin: 25px 0;
     padding: 20px;
+    background: #f8f9fa;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#totalTime {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #007BFF;
+    display: block;
+}
+
+.time-label {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.progress-bar {
+    height: 10px;
+    background: #e9ecef;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+.progress {
+    height: 100%;
+    background: #28a745;
+    border-radius: 5px;
+    width: 0%;
+}
+
+#progressText {
+    font-size: 0.9rem;
+    color: #6c757d;
 }
 
 .time-selector {
     display: flex;
     gap: 10px;
-    margin: 20px 0;
+    margin: 25px 0;
+    flex-wrap: wrap;
 }
 
 input, select, button {
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px;
+    font-size: 1rem;
 }
 
 button {
@@ -32,10 +73,17 @@ button {
     color: white;
     cursor: pointer;
     border: none;
+    transition: background 0.3s;
 }
 
 button:hover {
     background: #0056b3;
+}
+
+.activity-log {
+    margin-top: 30px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
 }
 
 #timeLog {
@@ -44,11 +92,22 @@ button:hover {
 }
 
 #timeLog li {
-    padding: 8px;
+    padding: 12px;
     border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
 }
 
-#totalTime {
+#timeLog li span:first-child {
     font-weight: bold;
-    color: #007BFF;
+}
+
+#reset {
+    width: 100%;
+    margin-top: 20px;
+    background: #dc3545;
+}
+
+#reset:hover {
+    background: #c82333;
 }
