@@ -7,15 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetBtn = document.getElementById('reset');
     const progress = document.getElementById('progress');
     const progressText = document.getElementById('progressText');
+    const activityType = document.getElementById('activityType');
+    const notification = document.getElementById('notification');
 
     // Cargar datos guardados
     let totalTime = parseInt(localStorage.getItem('devopsTotalTime')) || 0;
     let logs = JSON.parse(localStorage.getItem('devopsTimeLogs')) || [];
     
-    // Actualizar la UI al cargar
     updateUI();
 
-    // Función para formato de hora (AM/PM)
+    // Formato de hora AM/PM
     function formatTime(date) {
         let hours = date.getHours();
         const ampm = hours >= 12 ? 'PM' : 'AM';
@@ -24,23 +25,29 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${hours}:${minutes} ${ampm}`;
     }
 
+    // Mostrar notificación
+    function showNotification(message) {
+        notification.textContent = message;
+        notification.classList.add('notification-show');
+        setTimeout(() => {
+            notification.classList.remove('notification-show');
+        }, 2000);
+    }
+
     // Agregar tiempo
     addTimeBtn.addEventListener('click', () => {
         const time = customTime.value ? parseInt(customTime.value) : parseInt(predefinedTime.value);
+        const activity = activityType.value;
         
         if (time <= 0 || isNaN(time)) {
-            alert("¡Ingresa un tiempo válido!");
-            return;
-        }
-        
-        if (totalTime + time > 540) {
-            alert(`¡Solo faltan ${540 - totalTime} minutos para completar 9 horas!`);
+            alert("¡Tiempo inválido!");
             return;
         }
         
         totalTime += time;
         const now = new Date();
         logs.push({ 
+            activity,
             time, 
             timestamp: formatTime(now) 
         });
@@ -49,13 +56,18 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('devopsTotalTime', totalTime);
         localStorage.setItem('devopsTimeLogs', JSON.stringify(logs));
         
+        // Notificación si supera 540 min
+        if (totalTime >= 540) {
+            showNotification("Misión cumplida  ✅");
+        }
+        
         updateUI();
         customTime.value = '';
     });
 
     // Reiniciar día
     resetBtn.addEventListener('click', () => {
-        if (confirm("¿Borrar todo el registro del día?")) {
+        if (confirm("¿Reiniciar todo el registro?")) {
             totalTime = 0;
             logs = [];
             localStorage.removeItem('devopsTotalTime');
@@ -64,19 +76,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Actualizar la UI
+    // Actualizar UI
     function updateUI() {
         totalTimeDisplay.textContent = totalTime;
         
         // Barra de progreso
-        const percent = Math.round((totalTime / 540) * 100);
+        const percent = Math.min(Math.round((totalTime / 540) * 100), 100);
         progress.style.width = `${percent}%`;
         progressText.textContent = `${percent}% (${totalTime}/540 min)`;
         
         // Registro de actividades
         timeLog.innerHTML = logs.map(log => 
             `<li>
-                <span>+${log.time} min</span>
+                <span>${log.activity} (+${log.time} min)</span>
                 <span>${log.timestamp}</span>
             </li>`
         ).join('');
