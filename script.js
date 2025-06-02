@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const progress = document.getElementById('progress');
     const progressText = document.getElementById('progressText');
     const activityType = document.getElementById('activityType');
+    const customActivity = document.getElementById('customActivity');
     const notification = document.getElementById('notification');
 
     // Cargar datos guardados
@@ -15,6 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let logs = JSON.parse(localStorage.getItem('devopsTimeLogs')) || [];
     
     updateUI();
+
+    // Mostrar/ocultar input de actividad personalizada
+    activityType.addEventListener('change', function() {
+        customActivity.style.display = this.value === 'custom' ? 'block' : 'none';
+        if (this.value !== 'custom') customActivity.value = '';
+    });
 
     // Formato de hora AM/PM
     function formatTime(date) {
@@ -31,17 +38,25 @@ document.addEventListener('DOMContentLoaded', () => {
         notification.classList.add('notification-show');
         setTimeout(() => {
             notification.classList.remove('notification-show');
-        }, 2000);
+        }, 5000);
     }
 
     // Agregar tiempo
     addTimeBtn.addEventListener('click', () => {
         const time = customTime.value ? parseInt(customTime.value) : parseInt(predefinedTime.value);
-        const activity = activityType.value;
+        let activity = activityType.value;
         
         if (time <= 0 || isNaN(time)) {
             alert("¡Tiempo inválido!");
             return;
+        }
+        
+        if (activity === 'custom') {
+            activity = customActivity.value.trim();
+            if (!activity) {
+                alert("¡Describe la actividad!");
+                return;
+            }
         }
         
         totalTime += time;
@@ -58,11 +73,16 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Notificación si supera 540 min
         if (totalTime >= 540) {
-            showNotification("Misión cumplida  ✅");
+            showNotification("Misión cumplida ✅");
         }
         
         updateUI();
         customTime.value = '';
+        if (activityType.value === 'custom') {
+            customActivity.value = '';
+            activityType.value = 'Repositorios';
+            customActivity.style.display = 'none';
+        }
     });
 
     // Reiniciar día

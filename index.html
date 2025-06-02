@@ -25,15 +25,19 @@
         <div class="selectors">
             <div class="input-group">
                 <label for="activityType">Actividad:</label>
-                <select id="activityType">
-                    <option value="Repositorios">Repositorios</option>
-                    <option value="Pipelines">Pipelines</option>
-                    <option value="Gestion de ambientes / recursos">Gestión de ambientes/recursos</option>
-                    <option value="Liberaciones">Liberaciones</option>
-                    <option value="Monitoreo">Monitoreo</option>
-                    <option value="Workshops">Workshops</option>
-                    <option value="Assessment">Assessment</option>
-                </select>
+                <div class="custom-select">
+                    <select id="activityType">
+                        <option value="Repositorios">Repositorios</option>
+                        <option value="Pipelines">Pipelines</option>
+                        <option value="Gestion de ambientes / recursos">Gestión de ambientes/recursos</option>
+                        <option value="Liberaciones">Liberaciones</option>
+                        <option value="Monitoreo">Monitoreo</option>
+                        <option value="Workshops">Workshops</option>
+                        <option value="Assessment">Assessment</option>
+                        <option value="custom">Otra (escribir)</option>
+                    </select>
+                </div>
+                <input type="text" id="customActivity" placeholder="Describe la actividad" style="display: none; margin-top: 8px;">
             </div>
             
             <div class="input-group">
@@ -74,7 +78,7 @@
 
     <!-- Notificación temporal -->
     <div id="notification" class="notification-hidden">
-        <p>Misión cumplida SCM ✅</p>
+        <p>Misión cumplida ✅</p>
     </div>
 
     <script src="script.js"></script>
