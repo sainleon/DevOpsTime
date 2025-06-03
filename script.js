@@ -110,39 +110,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Optimized item removal with last item fix
   const removeItem = (index) => {
-    if (index > 0 && index < logs.length) {
-      // Get time before removal
+    if (index >= 0 && index < logs.length) {
       const removedTime = logs[index].time;
 
-      // Remove item from array
-      logs.pop(index);
+      logs.splice(index, 1);
 
-      // Update total time
       totalTime -= removedTime;
 
-      // Update storage
       localStorage.setItem("devopsTotalTime", totalTime);
       localStorage.setItem("devopsTimeLogs", JSON.stringify(logs));
 
-      // Update UI components
       updateTotalTime();
       updateProgressBar();
 
-      // Handle list updates differently based on remaining items
       if (logs.length === 0) {
-        // Clear entire list when empty
         timeLog.innerHTML = "";
       } else {
-        // Remove specific item and update indices
         const items = timeLog.querySelectorAll("li");
         if (items[index]) {
           items[index].remove();
 
-          // Update data-index for remaining items
           for (let i = index; i < items.length - 1; i++) {
-            const btn = items[i].querySelector(".delete-btn");
+            const btn = items[i + 1]?.querySelector(".delete-btn");
             if (btn) btn.setAttribute("data-index", i);
           }
         }
@@ -151,7 +141,6 @@ document.addEventListener("DOMContentLoaded", () => {
       showNotification("Activity removed");
     }
   };
-
   // Update total time display
   function updateTotalTime() {
     totalTimeDisplay.textContent = totalTime;
@@ -164,7 +153,6 @@ document.addEventListener("DOMContentLoaded", () => {
     progressText.textContent = `${percent}% (${totalTime}/540 min)`;
   }
 
-  // Full UI update (only used when adding items or initial load)
   function updateUI() {
     updateTotalTime();
     updateProgressBar();
