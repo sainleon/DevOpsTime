@@ -306,3 +306,80 @@ button:hover {
     background: #fafafa;
     border-radius: 6px;
 }
+
+
+body.dark {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+body.dark .container {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+
+body.dark input,
+body.dark select {
+  background-color: #2c2c2c;
+  color: #f0f0f0;
+  border-color: #555;
+}
+
+body.dark .time-display {
+  background-color: #2b2b2b;
+}
+
+body.dark .progress-bar {
+  background-color: #444;
+}
+
+body.dark #progressText {
+  color: #bbb;
+}
+
+body.dark .delete-btn {
+    background-color: #c0392b;
+    color: #fff;
+}
+
+
+body.dark .activity-entry {
+  background-color: #2c2c2c;
+  color: #f0f0f0;
+  border: 1px solid #444;
+}
+
+body.dark #activity-log li {
+  background-color: #2c2c2c;
+  color: #f0f0f0;
+  border: 1px solid #444;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+body.dark #activity-log {
+  color: #f0f0f0;
+}
+
+body.dark #activity-log .delete-button {
+  background-color: #c0392b;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+body.dark #timeLog li {
+    background-color: #2c2c2c;
+    color: #100e0e; /* Color claro para el texto */
+    border: 1px solid #444;
+}
+
+/* Asegúrate de que el texto dentro de los elementos también sea claro */
+body.dark #timeLog li span,
+body.dark #timeLog li strong,
+body.dark #timeLog li .activity-text {
+    color: #f0f0f0 !important;
+}
+
