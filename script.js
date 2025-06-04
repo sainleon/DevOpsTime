@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (this.value !== "custom") customActivity.value = "";
   });
 
+
   // Time formatting
   function formatTime(date) {
     let hours = date.getHours();
