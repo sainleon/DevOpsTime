@@ -176,3 +176,21 @@ document.addEventListener("DOMContentLoaded", () => {
       .join("");
   }
 });
+
+const toggleThemeBtn = document.getElementById("toggleTheme");
+
+// Cargar tema desde localStorage
+if (localStorage.getItem("devopsTheme") === "dark") {
+  document.body.classList.add("dark");
+  toggleThemeBtn.textContent = "☀️ Modo Claro";
+}
+
+toggleThemeBtn.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  const isDark = document.body.classList.contains("dark");
+
+  toggleThemeBtn.textContent = isDark ? "☀️ Modo Claro" : "🌙 Modo Oscuro";
+
+  localStorage.setItem("devopsTheme", isDark ? "dark" : "light");
+});
+
